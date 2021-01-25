@@ -12,7 +12,7 @@ namespace utils_lib.EntitiesUtils
 
         IQueryable<TKey> Create(IList<TEntity> entityList);
 
-        void Update(TKey id, TEntity entity);
+        void Update(TKey id, object entity);
 
         void Delete(TKey id);
 
