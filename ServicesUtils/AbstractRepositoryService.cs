@@ -34,7 +34,7 @@ namespace utils_lib.ServicesUtils
             return entityList.Select(e => e.TryGetPropertyValue<TKey>("Id")).AsQueryable();
         }
 
-        public void Update(TKey id, TEntity entity)
+        public void Update(TKey id, object entity)
         {
             var oldEntity = FindById(id);
             Context.Entry(oldEntity).CurrentValues.SetValues(entity);
