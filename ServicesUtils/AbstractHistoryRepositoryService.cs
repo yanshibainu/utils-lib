@@ -5,11 +5,8 @@ namespace utils_lib.ServicesUtils
     public abstract class AbstractHistoryRepositoryService<TEntity, TKey, THistoryEntity> : AbstractRepositoryService<THistoryEntity, TKey>, IHistoryRepositoryService<TEntity, THistoryEntity>
         where THistoryEntity : class, new() where TEntity : class, new()
     {
-        protected readonly DbContext Context;
-
         protected AbstractHistoryRepositoryService(DbContext context) : base(context)
         {
-            Context = context;
         }
 
         public THistoryEntity ToHistory(TEntity entity)
