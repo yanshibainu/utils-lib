@@ -59,7 +59,7 @@ namespace utils_lib.ServicesUtils
 
         public IQueryable<TEntity> All()
         {
-            return Context.Set<TEntity>();
+            return Context.Set<TEntity>().AsNoTracking();
         }
     }
 }
