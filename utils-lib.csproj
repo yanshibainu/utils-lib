@@ -11,4 +11,8 @@
     <PackageReference Include="Namotion.Reflection" Version="1.0.15" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ServicesUtils\" />
+  </ItemGroup>
+
 </Project>

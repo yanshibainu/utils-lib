@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace utils_lib.ServicesUtils
+namespace utils_lib.EntitiesUtils
 {
     public abstract class AbstractHistoryRepositoryService<TEntity, TKey, THistoryEntity> : AbstractRepositoryService<THistoryEntity, TKey>, IHistoryRepositoryService<TEntity, THistoryEntity>
         where THistoryEntity : class, new() where TEntity : class, new()

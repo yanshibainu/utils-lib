@@ -4,9 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Namotion.Reflection;
-using utils_lib.EntitiesUtils;
 
-namespace utils_lib.ServicesUtils
+namespace utils_lib.EntitiesUtils
 {
     public abstract class AbstractRepositoryService<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : class

@@ -1,4 +1,4 @@
-﻿namespace utils_lib.ServicesUtils
+﻿namespace utils_lib.EntitiesUtils
 {
     public interface IHistoryRepositoryService<TEntity, THistoryEntity>
     {
