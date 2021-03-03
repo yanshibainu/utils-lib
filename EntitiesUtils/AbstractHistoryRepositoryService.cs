@@ -9,7 +9,7 @@ namespace utils_lib.EntitiesUtils
         {
         }       
 
-        public THistoryEntity ToHistory(THistoryEntity entity)
+        public THistoryEntity ToHistory(object entity)
         {
             var newEntity = Context.Entry(new THistoryEntity());
             newEntity.CurrentValues.SetValues(entity);
