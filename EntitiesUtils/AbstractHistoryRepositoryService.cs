@@ -7,9 +7,9 @@ namespace utils_lib.EntitiesUtils
     {
         protected AbstractHistoryRepositoryService(DbContext context) : base(context)
         {
-        }
+        }       
 
-        public THistoryEntity ToHistory(TEntity entity)
+        public THistoryEntity ToHistory(THistoryEntity entity)
         {
             var newEntity = Context.Entry(new THistoryEntity());
             newEntity.CurrentValues.SetValues(entity);
