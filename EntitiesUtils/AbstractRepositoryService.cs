@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,21 @@ namespace utils_lib.EntitiesUtils
         {
             var oldEntity = FindById(id);
             Context.Entry(oldEntity).CurrentValues.SetValues(entity);
+
+            if (Context.Entry(oldEntity).References.Any())
+            {
+                var dictionary = TypeDescriptor.GetProperties(entity)
+                    .Cast<PropertyDescriptor>()
+                    .ToDictionary(property => property.Name,
+                        property => property.GetValue(entity));
+
+                foreach (var referenceEntry in Context.Entry(oldEntity).References)
+                {
+                    if(dictionary.ContainsKey(referenceEntry.Metadata.Name))
+                        referenceEntry.CurrentValue = dictionary[referenceEntry.Metadata.Name];
+                }
+            }
+
             Context.SaveChanges();
         }
 
