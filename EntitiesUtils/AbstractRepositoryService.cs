@@ -18,7 +18,7 @@ namespace utils_lib.EntitiesUtils
             Context = context;
         }
 
-        public TKey Create(TEntity entity)
+        public virtual TKey Create(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
             Context.SaveChanges();
@@ -26,7 +26,7 @@ namespace utils_lib.EntitiesUtils
             return entity.TryGetPropertyValue<TKey>("Id");
         }
 
-        public IQueryable<TKey> Create(IList<TEntity> entityList)
+        public virtual IQueryable<TKey> Create(IList<TEntity> entityList)
         {
             Context.Set<TEntity>().AddRange(entityList);
             Context.SaveChanges();
@@ -34,7 +34,7 @@ namespace utils_lib.EntitiesUtils
             return entityList.Select(e => e.TryGetPropertyValue<TKey>("Id")).AsQueryable();
         }
 
-        public void Update(TKey id, object entity)
+        public virtual void Update(TKey id, object entity)
         {
             var oldEntity = FindById(id);
             Context.Entry(oldEntity).CurrentValues.SetValues(entity);
@@ -56,23 +56,23 @@ namespace utils_lib.EntitiesUtils
             Context.SaveChanges();
         }
 
-        public void Delete(TKey id)
+        public virtual void Delete(TKey id)
         {
             Context.Remove(Context.Set<TEntity>().Find(id));
             Context.SaveChanges();
         }
 
-        public TEntity FindById(TKey id)
+        public virtual TEntity FindById(TKey id)
         {
             return Context.Set<TEntity>().Find(id);
         }
 
-        public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression)
+        public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression)
         {
             return Context.Set<TEntity>().Where(expression);
         }
 
-        public IQueryable<TEntity> All()
+        public virtual IQueryable<TEntity> All()
         {
             return Context.Set<TEntity>().AsNoTracking();
         }
