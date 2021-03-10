@@ -51,6 +51,12 @@ namespace utils_lib.EntitiesUtils
                     if(dictionary.ContainsKey(referenceEntry.Metadata.Name))
                         referenceEntry.CurrentValue = dictionary[referenceEntry.Metadata.Name];
                 }
+
+                foreach (var navigationEntry in Context.Entry(oldEntity).Navigations)
+                {
+                    if (dictionary.ContainsKey(navigationEntry.Metadata.Name))
+                        navigationEntry.CurrentValue = dictionary[navigationEntry.Metadata.Name];
+                }
             }
 
             Context.SaveChanges();
