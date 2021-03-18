@@ -6,14 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ServicesUtils\**" />
+    <EmbeddedResource Remove="ServicesUtils\**" />
+    <None Remove="ServicesUtils\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.11" />
     <PackageReference Include="Namotion.Reflection" Version="1.0.15" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ServicesUtils\" />
   </ItemGroup>
 
 </Project>
