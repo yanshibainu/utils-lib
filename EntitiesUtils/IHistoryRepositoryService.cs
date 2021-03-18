@@ -1,8 +1,8 @@
 ﻿namespace utils_lib.EntitiesUtils
 {
-    public interface IHistoryRepositoryService<out TEntity, THistoryEntity>
+    public interface IHistoryRepositoryService<TEntity, THistoryEntity>
     {
-        THistoryEntity ToHistory(object entity);
+        THistoryEntity ToHistory(TEntity entity);
 
         TEntity HistoryBack(THistoryEntity entity);
     }
