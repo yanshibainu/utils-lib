@@ -62,29 +62,6 @@ namespace utils_lib.EntitiesUtils
             Context.SaveChanges();
         }
 
-        public virtual void Update(IList<object> entityList)
-        {
-            foreach(var list in entityList)
-            {
-                var id = list.TryGetPropertyValue<TKey>("Id");
-                var oldEntity = FindById(id);
-                var dictionary = TypeDescriptor.GetProperties(list)
-                    .Cast<PropertyDescriptor>()
-                    .ToDictionary(property => property.Name,
-                        property => property.GetValue(list));
-
-                foreach (var d in dictionary)
-                {
-                    if (d.Key!="Id")
-                    {
-                        Context.Entry(oldEntity).CurrentValues.SetValues(d.Value);
-                    }
-                        
-                }
-            }
-            Context.SaveChanges();
-        }
-
         public virtual void Delete(TKey id)
         {
             Context.Remove(Context.Set<TEntity>().Find(id));

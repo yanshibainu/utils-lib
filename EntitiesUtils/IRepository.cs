@@ -14,8 +14,6 @@ namespace utils_lib.EntitiesUtils
 
         void Update(TKey id, object entity);
 
-        void Update(IList<object> entityList);
-
         void Delete(TKey id);
 
         TEntity FindById(TKey id);
