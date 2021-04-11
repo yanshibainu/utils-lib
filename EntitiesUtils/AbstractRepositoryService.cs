@@ -39,19 +39,22 @@ namespace utils_lib.EntitiesUtils
             var oldEntity = FindById(id);
             Context.Entry(oldEntity).CurrentValues.SetValues(entity);
 
+            var dictionary = TypeDescriptor.GetProperties(entity)
+                .Cast<PropertyDescriptor>()
+                .ToDictionary(property => property.Name,
+                    property => property.GetValue(entity));
+
             if (Context.Entry(oldEntity).References.Any())
             {
-                var dictionary = TypeDescriptor.GetProperties(entity)
-                    .Cast<PropertyDescriptor>()
-                    .ToDictionary(property => property.Name,
-                        property => property.GetValue(entity));
-
                 foreach (var referenceEntry in Context.Entry(oldEntity).References)
                 {
                     if(dictionary.ContainsKey(referenceEntry.Metadata.Name))
                         referenceEntry.CurrentValue = dictionary[referenceEntry.Metadata.Name];
                 }
+            }
 
+            if (Context.Entry(oldEntity).Navigations.Any())
+            {
                 foreach (var navigationEntry in Context.Entry(oldEntity).Navigations)
                 {
                     if (dictionary.ContainsKey(navigationEntry.Metadata.Name))
