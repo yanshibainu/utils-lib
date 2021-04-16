@@ -44,21 +44,24 @@ namespace utils_lib.EntitiesUtils
                 .ToDictionary(property => property.Name,
                     property => property.GetValue(entity));
 
-            if (Context.Entry(oldEntity).References.Any())
-            {
-                foreach (var referenceEntry in Context.Entry(oldEntity).References)
-                {
-                    if(dictionary.ContainsKey(referenceEntry.Metadata.Name))
-                        referenceEntry.CurrentValue = dictionary[referenceEntry.Metadata.Name];
-                }
-            }
+            //if (Context.Entry(oldEntity).References.Any())
+            //{
+            //    foreach (var referenceEntry in Context.Entry(oldEntity).References)
+            //    {
+            //        if (dictionary.ContainsKey(referenceEntry.Metadata.Name))
+            //            referenceEntry.CurrentValue = dictionary[referenceEntry.Metadata.Name];
+            //    }
+            //}
 
             if (Context.Entry(oldEntity).Navigations.Any())
             {
                 foreach (var navigationEntry in Context.Entry(oldEntity).Navigations)
                 {
-                    if (dictionary.ContainsKey(navigationEntry.Metadata.Name))
-                        navigationEntry.CurrentValue = dictionary[navigationEntry.Metadata.Name];
+                    //if (navigationEntry is CollectionEntry)
+                   // {
+                        if (dictionary.ContainsKey(navigationEntry.Metadata.Name))
+                            navigationEntry.CurrentValue = dictionary[navigationEntry.Metadata.Name];
+                   // }
                 }
             }
 
