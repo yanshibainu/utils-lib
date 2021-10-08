@@ -44,24 +44,12 @@ namespace utils_lib.EntitiesUtils
                 .ToDictionary(property => property.Name,
                     property => property.GetValue(entity));
 
-            //if (Context.Entry(oldEntity).References.Any())
-            //{
-            //    foreach (var referenceEntry in Context.Entry(oldEntity).References)
-            //    {
-            //        if (dictionary.ContainsKey(referenceEntry.Metadata.Name))
-            //            referenceEntry.CurrentValue = dictionary[referenceEntry.Metadata.Name];
-            //    }
-            //}
-
             if (Context.Entry(oldEntity).Navigations.Any())
             {
                 foreach (var navigationEntry in Context.Entry(oldEntity).Navigations)
                 {
-                    //if (navigationEntry is CollectionEntry)
-                   // {
-                        if (dictionary.ContainsKey(navigationEntry.Metadata.Name))
-                            navigationEntry.CurrentValue = dictionary[navigationEntry.Metadata.Name];
-                   // }
+                    if (dictionary.ContainsKey(navigationEntry.Metadata.Name))
+                        navigationEntry.CurrentValue = dictionary[navigationEntry.Metadata.Name];
                 }
             }
 
@@ -71,6 +59,14 @@ namespace utils_lib.EntitiesUtils
         public virtual void Delete(TKey id)
         {
             Context.Remove(Context.Set<TEntity>().Find(id));
+            Context.SaveChanges();
+        }
+        public virtual void Delete(IEnumerable<TKey> idList)
+        {
+            foreach (var id in idList)
+            {
+                Context.Remove(Context.Set<TEntity>().Find(id));
+            }
             Context.SaveChanges();
         }
 
