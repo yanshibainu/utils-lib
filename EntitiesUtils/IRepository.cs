@@ -16,6 +16,8 @@ namespace utils_lib.EntitiesUtils
 
         void Delete(TKey id);
 
+        void Delete(IEnumerable<TKey> idList);
+
         TEntity FindById(TKey id);
 
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression);
