@@ -56,6 +56,22 @@ namespace utils_lib.EntitiesUtils
             Context.SaveChanges();
         }
 
+        public virtual IQueryable<TKey> Update(IEnumerable<object> entitys)
+        {
+            foreach (var entity in entitys)
+            {                
+                if(entity.HasProperty("Id"))
+                {
+                    TKey id = (TKey)entity.GetType().GetProperty("Id").GetValue(entity, null);
+                    var oldEntity = FindById(id);
+                    Context.Entry(oldEntity).CurrentValues.SetValues(entity);
+                }
+            }
+
+            Context.SaveChanges();
+            return entitys.Select(e => e.TryGetPropertyValue<TKey>("Id")).AsQueryable();
+        }
+
         public virtual void Delete(TKey id)
         {
             Context.Remove(Context.Set<TEntity>().Find(id));
