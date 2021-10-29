@@ -14,6 +14,8 @@ namespace utils_lib.EntitiesUtils
 
         void Update(TKey id, object entity);
 
+        void Update(IEnumerable<object> entityList);
+
         void Delete(TKey id);
 
         void Delete(IEnumerable<TKey> idList);

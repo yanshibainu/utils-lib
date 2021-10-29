@@ -56,6 +56,17 @@ namespace utils_lib.EntitiesUtils
             Context.SaveChanges();
         }
 
+        public virtual void Update(IEnumerable<object> entityList)
+        {
+            using var transaction = Context.Database.BeginTransaction();
+            foreach (var entity in entityList)
+            {
+                Update(entity.TryGetPropertyValue<TKey>("Id"), entity);
+            }
+
+            transaction.Commit();
+        }
+
         public virtual void Delete(TKey id)
         {
             Context.Remove(Context.Set<TEntity>().Find(id));
