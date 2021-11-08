@@ -10,11 +10,11 @@ namespace utils_lib.EntitiesUtils
     {
         TKey Create(TEntity entity);
 
-        IQueryable<TKey> Create(IList<TEntity> entityList);
+        IList<TKey> Create(IList<TEntity> entityList);
 
-        void Update(TKey id, object entity);
+        TEntity Update(TKey id, object entity);
 
-        void Update(IEnumerable<object> entityList);
+        IList<TEntity> Update(IEnumerable<object> entityList);
 
         void Delete(TKey id);
 

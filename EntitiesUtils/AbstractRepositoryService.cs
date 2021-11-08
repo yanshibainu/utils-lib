@@ -26,15 +26,15 @@ namespace utils_lib.EntitiesUtils
             return entity.TryGetPropertyValue<TKey>("Id");
         }
 
-        public virtual IQueryable<TKey> Create(IList<TEntity> entityList)
+        public virtual IList<TKey> Create(IList<TEntity> entityList)
         {
-            Context.Set<TEntity>().AddRange(entityList);
+            Context.Set<TEntity>().AddRange(entityList.ToList());
             Context.SaveChanges();
 
-            return entityList.Select(e => e.TryGetPropertyValue<TKey>("Id")).AsQueryable();
+            return entityList.Select(e => e.TryGetPropertyValue<TKey>("Id")).ToList();
         }
 
-        public virtual void Update(TKey id, object entity)
+        public virtual TEntity Update(TKey id, object entity)
         {
             var oldEntity = FindById(id);
             Context.Entry(oldEntity).CurrentValues.SetValues(entity);
@@ -54,17 +54,19 @@ namespace utils_lib.EntitiesUtils
             }
 
             Context.SaveChanges();
+
+            return oldEntity;
         }
 
-        public virtual void Update(IEnumerable<object> entityList)
+        public virtual IList<TEntity> Update(IEnumerable<object> entityList)
         {
             using var transaction = Context.Database.BeginTransaction();
-            foreach (var entity in entityList)
-            {
-                Update(entity.TryGetPropertyValue<TKey>("Id"), entity);
-            }
+            var updatedEntity = entityList.
+                Select(entity => Update(entity.TryGetPropertyValue<TKey>("Id"), entity)).ToList();
 
             transaction.Commit();
+
+            return updatedEntity;
         }
 
         public virtual void Delete(TKey id)
