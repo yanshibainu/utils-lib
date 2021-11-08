@@ -27,9 +27,7 @@ namespace utils_lib.Controllers
 
             var id = _repository.Create(entity);
 
-            List<TEntity> entitys = new List<TEntity>() { _repository.FindById(id) };
-
-            return Ok(_mapper.ProjectTo<TView>(entitys.AsQueryable()).Single());
+            return Ok(_mapper.Map<TView>(_repository.FindById(id)));
         }
         [HttpDelete("{id}")]
         public ActionResult<TEntity> Delete(Guid id)
@@ -44,9 +42,7 @@ namespace utils_lib.Controllers
 
             _repository.Update(id, entity);
 
-            List<TEntity> entitys = new List<TEntity>() { _repository.FindById(id) };
-
-            return Ok(_mapper.ProjectTo<TView>(entitys.AsQueryable()).Single());
+            return Ok(_mapper.Map<TView>(_repository.FindById(id)));
         }
         [HttpGet]
         [EnableQuery]
