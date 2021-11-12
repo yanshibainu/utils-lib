@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
-namespace utils_lib.ControllersEntitiesUtils
+namespace utils_lib.ControllersUtils
 {
     public interface IController<in TKey, TViewModel, in TViewEdit>
     {

@@ -4,7 +4,7 @@ using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using utils_lib.EntitiesUtils;
 
-namespace utils_lib.ControllersEntitiesUtils
+namespace utils_lib.ControllersUtils
 {
     public abstract class AbstractController<TEntity, TKey, TViewModel, TViewEditModel> : Controller,
         IController<TKey, TViewModel, TViewEditModel>
