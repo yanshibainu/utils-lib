@@ -76,11 +76,13 @@ namespace utils_lib.EntitiesUtils
         }
         public virtual void Delete(IEnumerable<TKey> idList)
         {
+            using var transaction = Context.Database.BeginTransaction();
             foreach (var id in idList)
             {
-                Context.Remove(Context.Set<TEntity>().Find(id));
+                Delete(id);
             }
-            Context.SaveChanges();
+
+            transaction.Commit();
         }
 
         public virtual TEntity FindById(TKey id)
