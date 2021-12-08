@@ -27,7 +27,7 @@ namespace utils_lib.ControllersUtils
         }
 
         [HttpPost]
-        public ActionResult<TViewModel> Create(TViewModel viewModel)
+        public virtual ActionResult<TViewModel> Create(TViewModel viewModel)
         {
             var entity = Mapper.Map<TEntity>(viewModel);
 
@@ -37,14 +37,14 @@ namespace utils_lib.ControllersUtils
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<TViewModel> Delete(TKey id)
+        public virtual ActionResult<TViewModel> Delete(TKey id)
         {
             Repository.Delete(id);
             return Ok(Repository.FindById(id));
         }
 
         [HttpPut("{id}")]
-        public ActionResult<TViewModel> Edit(TKey id, TViewEditModel viewEditModel)
+        public virtual ActionResult<TViewModel> Edit(TKey id, TViewEditModel viewEditModel)
         {
             var updateEntity = Mapper.Map<TViewEditModel>(viewEditModel);
 
