@@ -97,5 +97,14 @@ namespace utils_lib.EntitiesUtils
         {
             return Context.Set<TEntity>().AsNoTracking();
         }
+
+        public virtual IList<TKey> DeleteAndCreate(IEnumerable<TKey> idList, IList<TEntity> entityList)
+        {
+            using var transaction = Context.Database.BeginTransaction();
+            Delete(idList);
+            IList<TKey> newIdList= Create(entityList);
+            transaction.Commit();
+            return newIdList;
+        }         
     }
 }

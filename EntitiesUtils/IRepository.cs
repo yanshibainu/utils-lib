@@ -20,6 +20,8 @@ namespace utils_lib.EntitiesUtils
 
         void Delete(IEnumerable<TKey> idList);
 
+        IList<TKey> DeleteAndCreate(IEnumerable<TKey> idList, IList<TEntity> entityList);
+
         TEntity FindById(TKey id);
 
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression);
