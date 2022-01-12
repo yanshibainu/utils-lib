@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,16 @@ namespace utils_lib.ControllersUtils
         public virtual ActionResult<TViewModel> Create(TViewModel viewModel)
         {
             var entity = Mapper.Map<TEntity>(viewModel);
+
+            Repository.Create(entity);
+
+            return Ok(Mapper.Map<TViewModel>(entity));
+        }
+
+        [HttpPost]
+        public virtual ActionResult<IList<TViewModel>> Create(IList<TViewModel> viewModel)
+        {
+            var entity = Mapper.Map<IList<TEntity>>(viewModel);
 
             Repository.Create(entity);
 
