@@ -37,7 +37,7 @@ namespace utils_lib.ControllersUtils
             return Ok(Mapper.Map<TViewModel>(entity));
         }
 
-        [HttpPost]
+        [HttpPost("MutiCreate")]
         public virtual ActionResult<IList<TViewModel>> Create(IList<TViewModel> viewModel)
         {
             var entity = Mapper.Map<IList<TEntity>>(viewModel);
