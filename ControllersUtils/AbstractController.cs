@@ -21,7 +21,7 @@ namespace utils_lib.ControllersUtils
 
         [HttpGet]
         [EnableQuery]
-        public ActionResult<IQueryable<TViewModel>> Index()
+        public virtual ActionResult<IQueryable<TViewModel>> Index()
         {
             return Ok(Mapper.ProjectTo<TViewModel>(Repository.All()));
         }
